@@ -1,5 +1,7 @@
-body {
-  background-color: black;
+.App{
+  /* Aplica um gradiente linear como plano de fundo do contêiner principal */
+  background: linear-gradient(to right bottom, #000000, rgb(22, 22, 22));
+  height: 100vh; /* Define a altura do contêiner como a altura total da viewport */
 }
 
 .App-header {
@@ -8,9 +10,15 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 15%;
-  background-color: #f2f2f2;
+  background: linear-gradient(to left top, rgb(248, 162, 2), rgb(0, 0, 0));
   padding: 20px;
 }
+
+.App-logo{
+  max-width: 10%;
+  height: auto;
+}
+
 
 .App-header h1 {
   text-align: center;
@@ -21,6 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .pesquisa {
@@ -53,12 +62,13 @@ body {
   flex-direction: column;
   overflow: scroll;
   padding-left: 10px;
+  box-shadow: 10px 10px 20px rgb(248, 162, 2);
 }
 
 button {
   padding: 10px 20px;
   background-color: #4caf50;
   color: white;
-  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
