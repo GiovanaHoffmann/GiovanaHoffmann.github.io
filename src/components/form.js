@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { FormProvider, useFormContext } from '../context/formContext';
 
@@ -13,6 +13,18 @@ const Form = () => {
     onSubmit: (values) => {
       dispatch({ type: 'SET_CAMPO', payload: { campo: 'categoria', valor: values.categoria } });
       dispatch({ type: 'SET_CAMPO', payload: { campo: 'year', valor: values.year } });
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.categoria) {
+        errors.categoria = 'Category is required';
+      }
+      if (!values.year) {
+        errors.year = 'Year is required';
+      } else if (!/^\d{4}$/.test(values.year)) {
+        errors.year = 'Year must be a valid 4-digit number';
+      }
+      return errors;
     },
   });
 
@@ -61,6 +73,11 @@ const Form = () => {
             onChange={formik.handleChange}
             value={formik.values.year}
           />
+          {formik.touched.year && formik.errors.year && (
+            <div style={{ color: 'red', fontSize: '14px', marginTop: '5px', marginRight: '7px' }}>
+              {formik.errors.year}
+            </div>
+          )}
           <select
             id="categoria"
             name="categoria"
@@ -75,6 +92,11 @@ const Form = () => {
             <option value="phy">Physics</option>
             <option value="med">Medicine</option>
           </select>
+          {formik.touched.categoria && formik.errors.categoria && (
+            <div style={{ color: 'red', fontSize: '14px', marginTop: '5px', marginLeft: '7px' }}>
+              {formik.errors.categoria}
+            </div>
+          )}
         </div>
         <button type="submit">Search</button>
       </form>
